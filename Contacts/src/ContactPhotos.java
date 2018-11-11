@@ -12,11 +12,16 @@ import java.util.Scanner;
 
 public class ContactPhotos {
 
+	public static final String OUTPUT_FOLDER_NAME = "Output-Photos";
+	public static final String DIR_SEP_CHAR = "/";
+	public static final String OUTPUT_DIR = DIR_SEP_CHAR + OUTPUT_FOLDER_NAME + DIR_SEP_CHAR;
+
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 
 		System.out.print("vCard Location:");
 		File inputFile = new File(in.nextLine());
+		in.close();
 		BufferedReader br;
 		try {
 			br = new BufferedReader(new FileReader(inputFile));
@@ -31,7 +36,8 @@ public class ContactPhotos {
 			String contactName = "";
 			String photoString = "";
 			boolean photoInProgress = false;
-			new File(inputFile.getParentFile().getAbsolutePath() + "/Output-Photos").mkdir();
+			new File(inputFile.getParentFile().getAbsolutePath()
+					+ OUTPUT_DIR.subSequence(0, OUTPUT_DIR.length() - 1)).mkdir();
 			while (newLine != null) {
 				if (newLine.contains("FN:")) {
 					contactName = newLine.substring(3);
@@ -51,7 +57,7 @@ public class ContactPhotos {
 						continue;
 					}
 					File outputFile = new File(inputFile.getParentFile().getAbsolutePath()
-							+ "/Output-Photos/" + contactName + ".jpg");
+							+ OUTPUT_DIR + contactName + ".jpg");
 					OutputStream os = new BufferedOutputStream(new FileOutputStream(outputFile));
 					os.write(imageBytes);
 					System.out.println("\n\n\n" + outputFile.getAbsolutePath());
