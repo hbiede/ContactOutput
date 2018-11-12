@@ -7,7 +7,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Base64;
-import java.util.Base64.Decoder;
 import java.util.Scanner;
 
 public class ContactPhotos {
@@ -19,6 +18,7 @@ public class ContactPhotos {
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 
+		// Get and import a vCard
 		System.out.print("vCard Location:");
 		File inputFile = new File(in.nextLine());
 		in.close();
@@ -36,39 +36,49 @@ public class ContactPhotos {
 			String contactName = "";
 			String photoString = "";
 			boolean photoInProgress = false;
-			new File(inputFile.getParentFile().getAbsolutePath()
-					+ OUTPUT_DIR.subSequence(0, OUTPUT_DIR.length() - 1)).mkdir();
+			int contactCount = 0;
+
+			// Create the output folder if it does not exist
+			new File(inputFile.getParentFile().getAbsolutePath() + OUTPUT_DIR).mkdir();
 			while (newLine != null) {
 				if (newLine.contains("FN:")) {
+					// Get the name for a new Contact
 					contactName = newLine.substring(3);
 				} else if (newLine.contains("PHOTO;")) {
+					// Start a new photo string
 					photoString = newLine.substring(newLine.indexOf(":") + 1);
 					photoInProgress = true;
 				} else if (photoInProgress && newLine.charAt(0) == ' ') {
+					// Add to the existing photo string if the line starts with a space (an indent
+					// to signify the photo is continuing)
 					photoString += newLine.substring(1);
 				} else if (photoInProgress) {
+					// Finish a photo string if the line is not indented while a photo string is
+					// being built
 					photoInProgress = false;
 					byte[] imageBytes;
 					try {
-						Decoder decoder = Base64.getDecoder();
-						imageBytes = decoder.decode(photoString);
+						// Decodes the photo string according to Base 64 to a byte array
+						imageBytes = Base64.getDecoder().decode(photoString);
 					} catch (Exception e) {
-						System.out.println(photoString);
+						System.out.println("Broken photo string: " + photoString);
 						continue;
 					}
+					// Store the output to the output folder created earlier as "Contact Name.jpg"
 					File outputFile = new File(inputFile.getParentFile().getAbsolutePath()
 							+ OUTPUT_DIR + contactName + ".jpg");
 					OutputStream os = new BufferedOutputStream(new FileOutputStream(outputFile));
 					os.write(imageBytes);
-					System.out.println("\n\n\n" + outputFile.getAbsolutePath());
 					os.close();
+					contactCount++;
 				}
 				newLine = br.readLine();
 			}
 			br.close();
+			System.out.println(contactCount + " contact photos exported.");
 		} catch (IOException e) {
+			System.out.println("Well, that's a problem...");
 			e.printStackTrace();
-			System.out.println("Well, that's a problem.");
 		}
 	}
 }
