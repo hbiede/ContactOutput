@@ -64,7 +64,7 @@ public class ContactPhotos {
 						System.out.println("Broken photo string: " + photoString);
 						continue;
 					}
-					// Store the output to the output folder created earlier as "Contact Name.jpg"
+					// Store the output to the output folder created earlier as "First Last.jpg"
 					File outputFile = new File(inputFile.getParentFile().getAbsolutePath()
 							+ OUTPUT_DIR + contactName + ".jpg");
 					OutputStream os = new BufferedOutputStream(new FileOutputStream(outputFile));
