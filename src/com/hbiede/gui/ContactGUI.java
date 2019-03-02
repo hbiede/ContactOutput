@@ -117,6 +117,7 @@ public class ContactGUI {
                 }
             } else {
                 // Run Photo Output
+                progressBar.setValue(0);
                 ContactPhotos.outputPhotos(inputFile, outputDirectory, progressBar, outputNameLastFirst);
                 // Display final contact count
                 contactCountLabel.setText(String.format("%d contact photos exported", progressBar.getValue()));
