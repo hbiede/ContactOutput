@@ -6,7 +6,15 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cefcd94d-a25c-4932-aea8-4c60772b12db" name="Default Changelist" comment="" />
+    <list default="true" id="cefcd94d-a25c-4932-aea8-4c60772b12db" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/ContactPhotos_jar/ContactPhotos.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/ContactPhotos_jar/ContactPhotos.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ContactPhotos/com/hbiede/gui/ContactGUI$ButtonListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ContactPhotos/com/hbiede/gui/ContactGUI$ButtonListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/hbiede/ContactPhotos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hbiede/ContactPhotos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/hbiede/gui/ContactGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hbiede/gui/ContactGUI.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/hbiede/gui/ContactGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hbiede/gui/ContactGUI.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,7 +22,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -22,6 +30,9 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -31,9 +42,9 @@
         <option value="$PROJECT_DIR$/out/production/ContactPhotos/META-INF/MANIFEST.MF" />
         <option value="$PROJECT_DIR$/src/main/hbiede/ContactPhotos.java" />
         <option value="$PROJECT_DIR$/src/main/com/hbiede/ContactPhotos.java" />
+        <option value="$PROJECT_DIR$/src/com/hbiede/gui/ContactGUI.java" />
         <option value="$PROJECT_DIR$/src/com/hbiede/gui/ContactGUI.form" />
         <option value="$PROJECT_DIR$/src/com/hbiede/ContactPhotos.java" />
-        <option value="$PROJECT_DIR$/src/com/hbiede/gui/ContactGUI.java" />
       </list>
     </option>
   </component>
@@ -90,12 +101,20 @@
               <item name="hbiede" type="462c0819:PsiDirectoryNode" />
               <item name="gui" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="ContactOutput" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ContactOutput" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="hbiede" type="462c0819:PsiDirectoryNode" />
+              <item name="gui" type="462c0819:PsiDirectoryNode" />
+              <item name="ContactGUI" type="e9f4de52:FormNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -151,16 +170,17 @@
       <workItem from="1551568418028" duration="300000" />
       <workItem from="1551569724052" duration="179000" />
       <workItem from="1551569911846" duration="113000" />
+      <workItem from="1551570401647" duration="701000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12002000" />
+    <option name="totallyTimeSpent" value="12703000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="961" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27106228" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2741148" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info x="615" y="282" width="450" height="442" id="UI Designer" order="3" type="WINDOWED" />
@@ -208,10 +228,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.base/java/io/File.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="1319" column="19" selection-start-line="1319" selection-start-column="19" selection-end-line="1319" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/hbiede/ContactPhotos.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="792">
-          <caret line="84" column="52" selection-start-line="84" selection-start-column="52" selection-end-line="84" selection-end-column="52" />
+        <state relative-caret-position="129">
+          <caret line="23" column="5" lean-forward="true" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -220,8 +247,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/hbiede/gui/ContactGUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1755">
-          <caret line="119" column="40" selection-start-line="119" selection-start-column="40" selection-end-line="119" selection-end-column="40" />
+        <state relative-caret-position="660">
+          <caret line="122" column="60" selection-start-line="122" selection-start-column="60" selection-end-line="122" selection-end-column="83" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

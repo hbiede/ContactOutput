@@ -73,7 +73,7 @@ public class ContactPhotos {
 						// Decodes the photo string according to Base 64 to a byte array
 						imageBytes = Base64.getDecoder().decode(photoString);
 					} catch (Exception e) {
-						System.out.println("Broken photo string: " + photoString);
+						System.out.printf("Broken photo on contact \"%s\"\n", contactName);
 						continue;
 					}
 					// Store the output to the output folder created earlier as "First Last.jpg"
@@ -82,7 +82,6 @@ public class ContactPhotos {
 					os.write(imageBytes);
 					os.close();
 					progressBar.setValue(progressBar.getValue()+1);
-					System.out.println(contactName);
 				}
 				newLine = br.readLine();
 			}

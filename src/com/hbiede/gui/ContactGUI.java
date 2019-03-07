@@ -121,6 +121,7 @@ public class ContactGUI {
                 ContactPhotos.outputPhotos(inputFile, outputDirectory, progressBar, outputNameLastFirst);
                 // Display final contact count
                 contactCountLabel.setText(String.format("%d contact photos exported", progressBar.getValue()));
+                contactCountLabel.setVisible(true);
             }
 
             // Enable the run button once there are valid selections

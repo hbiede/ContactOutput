@@ -34,7 +34,7 @@
       </vspacer>
       <component id="4f10c" class="javax.swing.JButton" binding="directoryButton">
         <constraints>
-          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
@@ -44,13 +44,13 @@
       </component>
       <hspacer id="4e737">
         <constraints>
-          <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
       </hspacer>
       <grid id="b1a34" binding="radioPanel" layout-manager="GridBagLayout">
         <constraints>
-          <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties/>
@@ -64,6 +64,7 @@
             <properties>
               <actionCommand value="FirstLast"/>
               <text value="First Last"/>
+              <toolTipText value="ie John Smith"/>
             </properties>
           </component>
           <component id="d4199" class="javax.swing.JRadioButton" binding="lastFirstRadioButton" default-binding="true">
@@ -75,6 +76,7 @@
               <actionCommand value="LastFirst"/>
               <selected value="true"/>
               <text value="Last, First"/>
+              <toolTipText value="ie Smith, John"/>
             </properties>
           </component>
           <component id="a5da" class="javax.swing.JLabel" binding="radioTitleLabel">
@@ -90,7 +92,7 @@
       </grid>
       <component id="593ec" class="javax.swing.JButton" binding="runButton">
         <constraints>
-          <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
@@ -104,25 +106,33 @@
       </component>
       <component id="8c9cc" class="javax.swing.JProgressBar" binding="progressBar">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
+          <stringPainted value="false"/>
           <value value="0"/>
         </properties>
       </component>
       <component id="392b9" class="javax.swing.JLabel" binding="contactCountLabel">
         <constraints>
-          <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
+          <enabled value="true"/>
           <horizontalAlignment value="0"/>
           <horizontalTextPosition value="0"/>
-          <text value="Label"/>
-          <visible value="false"/>
+          <text value="000 contact photos exported"/>
+          <visible value="true"/>
         </properties>
       </component>
+      <vspacer id="e03d7">
+        <constraints>
+          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <gridbag weightx="0.0" weighty="0.0"/>
+        </constraints>
+      </vspacer>
     </children>
   </grid>
   <buttonGroups>
