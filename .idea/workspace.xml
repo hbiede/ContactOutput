@@ -7,13 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cefcd94d-a25c-4932-aea8-4c60772b12db" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/ContactPhotos_jar/ContactPhotos.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/ContactPhotos_jar/ContactPhotos.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ContactPhotos/com/hbiede/gui/ContactGUI$ButtonListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ContactPhotos/com/hbiede/gui/ContactGUI$ButtonListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/hbiede/ContactPhotos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hbiede/ContactPhotos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/hbiede/gui/ContactGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hbiede/gui/ContactGUI.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/hbiede/gui/ContactGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/hbiede/gui/ContactGUI.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,7 +42,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1680" />
     <option name="height" value="961" />
@@ -58,6 +52,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -101,19 +96,10 @@
               <item name="hbiede" type="462c0819:PsiDirectoryNode" />
               <item name="gui" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="ContactOutput" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ContactOutput" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="hbiede" type="462c0819:PsiDirectoryNode" />
-              <item name="gui" type="462c0819:PsiDirectoryNode" />
-              <item name="ContactGUI" type="e9f4de52:FormNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -171,16 +157,19 @@
       <workItem from="1551569724052" duration="179000" />
       <workItem from="1551569911846" duration="113000" />
       <workItem from="1551570401647" duration="701000" />
+      <workItem from="1551922940537" duration="6000" />
+      <workItem from="1552587231648" duration="196000" />
+      <workItem from="1553345577235" duration="8000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12703000" />
+    <option name="totallyTimeSpent" value="12913000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1680" height="961" extended-state="6" />
+    <frame x="0" y="23" width="1680" height="961" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2741148" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2832723" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info x="615" y="282" width="450" height="442" id="UI Designer" order="3" type="WINDOWED" />
