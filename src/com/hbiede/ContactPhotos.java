@@ -1,14 +1,8 @@
 package com.hbiede;
 import com.hbiede.gui.ContactGUI;
 
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
+import java.net.URL;
 import java.util.Base64;
 
 import javax.swing.*;
@@ -56,7 +50,7 @@ public class ContactPhotos {
 					}
 				} else if (newLine.startsWith("ORG:")) {
 					contactName = newLine.substring(4).split(";")[0];
-				} else if (newLine.contains("PHOTO;")) {
+				} else if (newLine.contains("PHOTO")) {
 					// Start a new photo string
 					photoString = newLine.substring(newLine.indexOf(":") + 1);
 					photoInProgress = true;
@@ -68,20 +62,28 @@ public class ContactPhotos {
 					// Finish a photo string if the line is not indented while a photo string is
 					// being built
 					photoInProgress = false;
-					byte[] imageBytes;
 					try {
-						// Decodes the photo string according to Base 64 to a byte array
-						imageBytes = Base64.getDecoder().decode(photoString);
+						File outputFile = new File(outputDirectory.getAbsolutePath() + "/" + contactName + ".jpg");
+						OutputStream os = new BufferedOutputStream(new FileOutputStream(outputFile));
+						if (photoString.contains("http")) {
+							InputStream imageReader = new BufferedInputStream(new URL(photoString).openStream());
+							int imageByte;
+							while ((imageByte = imageReader.read()) != -1)
+							{
+								os.write(imageByte);
+							}
+							imageReader.close();
+						} else {
+							// Decode and store the output to the output folder created earlier
+							os.write(Base64.getDecoder().decode(photoString));
+						}
+						SwingUtilities.invokeLater(() -> progressBar.setValue(progressBar.getValue() + 1));
+						os.close();
 					} catch (Exception e) {
 						System.out.printf("Broken photo on contact \"%s\"\n", contactName);
 						continue;
 					}
-					// Store the output to the output folder created earlier as "First Last.jpg"
-					File outputFile = new File(outputDirectory.getAbsolutePath() + "/" + contactName + ".jpg");
-					OutputStream os = new BufferedOutputStream(new FileOutputStream(outputFile));
-					os.write(imageBytes);
-					os.close();
-					progressBar.setValue(progressBar.getValue()+1);
+
 				}
 				newLine = br.readLine();
 			}
