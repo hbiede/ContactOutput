@@ -77,7 +77,7 @@ public class ContactPhotos {
 							// Decode and store the output to the output folder created earlier
 							os.write(Base64.getDecoder().decode(photoString));
 						}
-						SwingUtilities.invokeLater(() -> progressBar.setValue(progressBar.getValue() + 1));
+						progressBar.setValue(progressBar.getValue() + 1);
 						os.close();
 					} catch (Exception e) {
 						System.out.printf("Broken photo on contact \"%s\"\n", contactName);
