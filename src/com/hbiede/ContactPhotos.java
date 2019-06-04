@@ -48,7 +48,7 @@ public class ContactPhotos {
 					} else {
 						contactName = newLine.substring(3);
 					}
-				} else if (newLine.startsWith("ORG:")) {
+				} else if (newLine.startsWith("ORG:") && "".equals(contactName)) { // contact name must be blank so as to prevent a person with a company name associated from being named after the company
 					contactName = newLine.substring(4).split(";")[0];
 				} else if (newLine.contains("PHOTO")) {
 					// Start a new photo string
@@ -79,6 +79,7 @@ public class ContactPhotos {
 						}
 						progressBar.setValue(progressBar.getValue() + 1);
 						os.close();
+						contactName = "";
 					} catch (Exception e) {
 						System.out.printf("Broken photo on contact \"%s\"\n", contactName);
 						continue;
