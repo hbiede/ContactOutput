@@ -1,6 +1,7 @@
 package com.hbiede.gui;
 
 import com.hbiede.ContactPhotos;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -11,27 +12,32 @@ import java.beans.PropertyChangeListener;
 import java.io.File;
 
 public class ContactGUI {
+    private static final int LARGE_SIZE_FILE_LENGTH = 0x6400000;
     public JPanel mainPanel;
     public JButton fileButton;
     public JButton directoryButton;
     public JButton runButton;
-    ContactPhotos outputTask = new ContactPhotos();
+    private ContactPhotos outputTask = new ContactPhotos();
     private JFrame frame;
     private JProgressBar progressBar;
+    @SuppressWarnings("unused")
     private JPanel radioPanel;
     private JRadioButton firstLastRadioButton;
     private JRadioButton lastFirstRadioButton;
+    @SuppressWarnings("unused")
     private JLabel radioTitleLabel;
     private JLabel contactCountLabel;
+    @SuppressWarnings("unused")
     private ButtonGroup radioButtonGroup;
     private boolean outputNameLastFirst;
+    @Nullable
     private File inputFile;
     private File outputDirectory;
 
 
     public ContactGUI() {
+        super();
         outputNameLastFirst = true;
-        inputFile = outputDirectory = null;
         fileButton.addActionListener(new ButtonListener());
         directoryButton.addActionListener(new ButtonListener());
         runButton.addActionListener(new ButtonListener());
@@ -77,7 +83,7 @@ public class ContactGUI {
                         inputFile = null;
                     } else {
                         // Give a warning if the file is rather large (100MB+)
-                        if (inputFile.length() > 0x6400000) {
+                        if (inputFile.length() > LARGE_SIZE_FILE_LENGTH) {
                             contactCountLabel.setText("Loading...");
                             contactCountLabel.setVisible(true);
                             System.out.println("Big file");
