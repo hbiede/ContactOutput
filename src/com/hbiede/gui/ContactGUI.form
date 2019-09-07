@@ -18,6 +18,7 @@
           <minimumSize width="120" height="30"/>
           <preferredSize width="120" height="30"/>
           <text value="VCF File"/>
+          <toolTipText value="Choose a VCF File to process"/>
         </properties>
       </component>
       <hspacer id="3f869">
@@ -40,6 +41,7 @@
         <properties>
           <actionCommand value="dir"/>
           <text value="Output Folder"/>
+          <toolTipText value="Choose a folder to which to output the photos"/>
         </properties>
       </component>
       <hspacer id="4e737">
