@@ -7,23 +7,64 @@ import java.util.Base64;
 
 import javax.swing.*;
 
-public class ContactPhotos {
+public class ContactPhotos extends SwingWorker<Void, Void> {
+
+	private File inputFile;
+	private File outputDirectory;
+	private JButton runButton;
+	private int totalContacts;
+	private int contactsOutputSoFar = 0;
+	private boolean outputNameLastFirst = true;
+
 
 	public static void main(String args[]){
-		JFrame frame = new JFrame("Contact Photos");
-		frame.setContentPane(new ContactGUI().mainPanel);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.pack();
-		frame.setVisible(true);
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				JFrame frame = new JFrame("Contact Photos");
+				frame.setContentPane(new ContactGUI().mainPanel);
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frame.pack();
+				frame.setVisible(true);
+			}
+		});
 	}
 
-	public static void outputPhotos(File inputFile, File outputDirectory, JProgressBar progressBar, boolean outputNameLastFirst) {
+	public void setRunButton(JButton runButton) {
+		this.runButton = runButton;
+	}
+
+	public void setInputFile(File inputFile) {
+		this.inputFile = inputFile;
+	}
+
+	public void setOutputDirectory(File outputDirectory) {
+		this.outputDirectory = outputDirectory;
+	}
+
+	public int getContactsOutputSoFar() {
+		return contactsOutputSoFar;
+	}
+
+	public void setOutputNameLastFirst(boolean outputNameLastFirst) {
+		this.outputNameLastFirst = outputNameLastFirst;
+	}
+
+	public void setTotalContacts(int totalContacts) {
+		this.totalContacts = totalContacts;
+	}
+
+	public int getTotalContacts() {
+		return totalContacts;
+	}
+
+	@Override
+	protected Void doInBackground() throws Exception {
 		BufferedReader br;
 		try {
 			br = new BufferedReader(new FileReader(inputFile));
 		} catch (FileNotFoundException e) {
 			System.out.println("Please input a valid vCard file.");
-			return;
+			return null;
 		}
 
 		String newLine;
@@ -35,14 +76,14 @@ public class ContactPhotos {
 
 			// Create the output folder if it does not exist
 			outputDirectory.mkdir();
-			while (newLine != null) {
-				if (newLine.startsWith("FN:")) {
+			while (newLine != null && !isCancelled()) {
+				if (newLine.startsWith("N:")) {
 					// Get the name for a new Contact
 					if (outputNameLastFirst) {
-						String[] tokens = newLine.substring(3).split(" ", 2);
+						String[] tokens = newLine.substring(2).split(";");
 						if (tokens.length > 1) {
-							contactName = tokens[1] + ", " + tokens[0];
-						} else {
+							contactName = tokens[0] + ", " + tokens[1];
+						} else if (tokens.length == 1) {
 							contactName = tokens[0];
 						}
 					} else {
@@ -77,11 +118,13 @@ public class ContactPhotos {
 							// Decode and store the output to the output folder created earlier
 							os.write(Base64.getDecoder().decode(photoString));
 						}
-						progressBar.setValue(progressBar.getValue() + 1);
+						contactsOutputSoFar++;
+						setProgress(100 * contactsOutputSoFar / totalContacts);
 						os.close();
 						contactName = "";
 					} catch (Exception e) {
 						System.out.printf("Broken photo on contact \"%s\"\n", contactName);
+						System.err.println(e.getMessage());
 						continue;
 					}
 
@@ -93,5 +136,12 @@ public class ContactPhotos {
 			System.out.println("Well, that's a problem...");
 			e.printStackTrace();
 		}
+		return null;
+	}
+
+	@Override
+	protected void done() {
+		runButton.setActionCommand("run");
+		runButton.setText("Run");
 	}
 }
