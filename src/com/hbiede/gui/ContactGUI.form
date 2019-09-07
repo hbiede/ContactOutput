@@ -10,7 +10,7 @@
       <component id="ed66e" class="javax.swing.JButton" binding="fileButton">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="0.0"/>
+          <gridbag top="0" left="5" bottom="0" right="0" weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
           <actionCommand value="file"/>
@@ -93,13 +93,13 @@
       <component id="593ec" class="javax.swing.JButton" binding="runButton">
         <constraints>
           <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="0.0"/>
+          <gridbag top="0" left="0" bottom="0" right="5" weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
           <actionCommand value="run"/>
           <enabled value="false"/>
-          <maximumSize width="83" height="30"/>
-          <minimumSize width="83" height="30"/>
+          <maximumSize width="90" height="30"/>
+          <minimumSize width="90" height="30"/>
           <preferredSize width="83" height="30"/>
           <text value="Run"/>
         </properties>
@@ -107,9 +107,10 @@
       <component id="8c9cc" class="javax.swing.JProgressBar" binding="progressBar">
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="0.0"/>
+          <gridbag top="0" left="5" bottom="0" right="0" weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
+          <minimumSize width="12" height="4"/>
           <stringPainted value="false"/>
           <value value="0"/>
         </properties>
@@ -117,13 +118,13 @@
       <component id="392b9" class="javax.swing.JLabel" binding="contactCountLabel">
         <constraints>
           <grid row="3" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-          <gridbag weightx="0.0" weighty="0.0"/>
+          <gridbag top="0" left="5" bottom="0" right="0" weightx="0.0" weighty="0.0"/>
         </constraints>
         <properties>
           <enabled value="true"/>
           <horizontalAlignment value="0"/>
           <horizontalTextPosition value="0"/>
-          <text value="000 contact photos exported"/>
+          <text value="000 contact photos exported before cancelling"/>
           <visible value="true"/>
         </properties>
       </component>

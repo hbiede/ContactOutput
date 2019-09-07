@@ -3,19 +3,20 @@ package com.hbiede.gui;
 import com.hbiede.ContactPhotos;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.*;
+import java.io.File;
 
 public class ContactGUI {
     public JPanel mainPanel;
-    private JButton fileButton;
-    private JButton directoryButton;
-    private JButton runButton;
+    public JButton fileButton;
+    public JButton directoryButton;
+    public JButton runButton;
+    ContactPhotos outputTask = new ContactPhotos();
+    private JFrame frame;
     private JProgressBar progressBar;
     private JPanel radioPanel;
     private JRadioButton firstLastRadioButton;
@@ -26,7 +27,6 @@ public class ContactGUI {
     private boolean outputNameLastFirst;
     private File inputFile;
     private File outputDirectory;
-    ContactPhotos outputTask = new ContactPhotos();
 
 
     public ContactGUI() {
@@ -37,34 +37,11 @@ public class ContactGUI {
         runButton.addActionListener(new ButtonListener());
         firstLastRadioButton.addActionListener(new RadioListener());
         lastFirstRadioButton.addActionListener(new RadioListener());
+        contactCountLabel.setVisible(false);
     }
 
-    private static int countContacts(File contactsFile) {
-        BufferedReader br;
-        int contactsCount = 0;
-        try {
-            br = new BufferedReader(new FileReader(contactsFile));
-        } catch (FileNotFoundException fnfe) {
-            fnfe.printStackTrace();
-            return 0;
-        }
-
-        String newLine;
-        try {
-            newLine = br.readLine();
-            while (newLine != null) {
-                if (newLine.contains("PHOTO;")) {
-                    contactsCount++;
-                }
-                newLine = br.readLine();
-            }
-            br.close();
-        } catch (IOException e) {
-            // Shouldn't ever come up. Just pleasing the compiler
-            System.out.println("Well, that's a problem...");
-            e.printStackTrace();
-        }
-        return contactsCount;
+    public void setFrame(JFrame frame) {
+        this.frame = frame;
     }
 
     private class RadioListener implements ActionListener {
@@ -88,7 +65,7 @@ public class ContactGUI {
                 // Only allow vCards
                 fc.setFileFilter(new FileNameExtensionFilter("vCard", "vcf"));
                 // Only set the file location if it is an affirmative selection
-                int returnVal = fc.showOpenDialog(ContactGUI.this.mainPanel);
+                int returnVal = fc.showOpenDialog(mainPanel);
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     inputFile = fc.getSelectedFile();
 
@@ -105,9 +82,7 @@ public class ContactGUI {
                             contactCountLabel.setVisible(true);
                             System.out.println("Big file");
                         }
-                        // Count the number of contacts in the file
-                        progressBar.setMaximum(100);
-                        outputTask.setTotalContacts(countContacts(inputFile));
+
                         outputTask.setInputFile(inputFile);
                     }
                 }
@@ -117,7 +92,7 @@ public class ContactGUI {
                 fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
                 // Only set the file location if it is an affirmative selection
-                int returnVal = fc.showOpenDialog(ContactGUI.this.mainPanel);
+                int returnVal = fc.showOpenDialog(mainPanel);
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     outputDirectory = fc.getSelectedFile();
                     outputTask.setOutputDirectory(outputDirectory);
@@ -125,27 +100,50 @@ public class ContactGUI {
             } else if ("run".equals(e.getActionCommand())) {
                 // Run Photo Output
                 progressBar.setValue(0);
+                contactCountLabel.setText("0 contact photos exported");
 
                 // allow the action to be stopable
                 runButton.setActionCommand("cancel");
                 runButton.setText("Cancel");
 
+                // setup the threaded task
                 outputTask.addPropertyChangeListener(this);
-                outputTask.setRunButton(runButton);
-                outputTask.execute();
+                if (outputTask.isRunnable()) outputTask.execute();
+                else {
+                    //restore properties to non-running state and disable run button
+                    contactCountLabel.setText("Problem Occurred with Property Setting");
+                    runButton.setActionCommand("run");
+                    runButton.setText("Run");
+                    runButton.setEnabled(false);
+                }
 
+                directoryButton.setEnabled(false);
+                runButton.setEnabled(false);
                 contactCountLabel.setVisible(true);
 
             } else {
+                // cancel button pressed
                 outputTask.cancel(true);
                 contactCountLabel.setVisible(true);
                 contactCountLabel.setText(String.format("%d contact photos exported before cancelling", outputTask.getContactsOutputSoFar()));
+                frame.pack();
+
+                //reenable buttons
+                directoryButton.setEnabled(true);
+                runButton.setEnabled(true);
+
+                //reset the task
+                outputTask = new ContactPhotos();
+                outputTask.setOutputNameLastFirst(outputNameLastFirst);
+                outputTask.setOutputDirectory(outputDirectory);
+                outputTask.setInputFile(inputFile);
             }
 
             // Enable the run button once there are valid selections
             runButton.setEnabled(inputFile != null && outputDirectory != null);
         }
 
+        @Override
         public void propertyChange(PropertyChangeEvent evt) {
             if ("progress".equals(evt.getPropertyName())) {
                 int progress = (Integer) evt.getNewValue();
