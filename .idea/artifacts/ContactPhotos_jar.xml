@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="ContactPhotos:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/ContactPhotos_jar</output-path>
-    <root id="archive" name="ContactPhotos.jar">
-      <element id="module-output" name="ContactPhotos" />
-    </root>
-  </artifact>
-</component>
