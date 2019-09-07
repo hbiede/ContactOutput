@@ -62,7 +62,7 @@ bin/
 .settings/
 .classpath
 .project
-out/
+out/*
 *.iml
 *.iws
 *.ipr
