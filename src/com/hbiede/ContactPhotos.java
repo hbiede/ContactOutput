@@ -124,10 +124,10 @@ public class ContactPhotos extends SwingWorker<Void, Void> {
                     // Get the name for a new Contact
                     if (outputNameLastFirst) {
                         String[] tokens = newLine.substring(2).split(";");
-                        if (tokens.length > 1) {
-                            contactName = tokens[0] + ", " + tokens[1];
-                        } else if (tokens.length == 1) {
+                        if (tokens.length == 1 || tokens[1] == null || tokens[1].trim().isEmpty()) {
                             contactName = tokens[0];
+                        } else {
+                            contactName = (tokens[0] == null || tokens[0].trim().isEmpty()) ? tokens[1] : tokens[0] + ", " + tokens[1];
                         }
                     } else {
                         contactName = newLine.substring(3);
