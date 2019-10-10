@@ -1,6 +1,8 @@
 package com.hbiede.gui;
 
 import com.hbiede.ContactPhotos;
+import com.hbiede.Localizer;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -34,6 +36,19 @@ public class ContactGUI {
     private File inputFile;
     private File outputDirectory;
 
+    @NonNls
+    private static final String PROGRESS_EVENT_MESSAGE = "progress";
+    @NonNls
+    private static final String CANCEL_ACTION_COMMAND = "cancel";
+    @NonNls
+    private static final String RUN_ACTION_COMMAND = "run";
+    @NonNls
+    private static final String V_CARD_DESCRIPTION = "vCard";
+    @NonNls
+    private static final String VCF_EXTENSION = "vcf";
+    @NonNls
+    private static final String LAST_FIRST_ACTION_CMD = "LastFirst";
+
 
     public ContactGUI() {
         super();
@@ -51,9 +66,10 @@ public class ContactGUI {
     }
 
     private class RadioListener implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
-            outputNameLastFirst = "LastFirst".equals(e.getActionCommand());
+            outputNameLastFirst = LAST_FIRST_ACTION_CMD.equals(e.getActionCommand());
             outputTask.setOutputNameLastFirst(outputNameLastFirst);
         }
     }
@@ -69,7 +85,7 @@ public class ContactGUI {
                 // Open File selection window
                 final JFileChooser fc = new JFileChooser();
                 // Only allow vCards
-                fc.setFileFilter(new FileNameExtensionFilter("vCard", "vcf"));
+                fc.setFileFilter(new FileNameExtensionFilter(V_CARD_DESCRIPTION, VCF_EXTENSION));
                 // Only set the file location if it is an affirmative selection
                 int returnVal = fc.showOpenDialog(mainPanel);
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
@@ -78,15 +94,15 @@ public class ContactGUI {
                     // Check if there is enough free space on the disk to store the photos
                     // Working under the assumption that inputFile's file size serves as a
                     if (inputFile.length() >= inputFile.getFreeSpace()) {
-                        JOptionPane.showMessageDialog(new JFrame("Not Enough Space"), "Not Enough Free Space!\nPlease clear out some hard drive space.", "Dialog",
+                        JOptionPane.showMessageDialog(new JFrame(Localizer.i18n_str("InsufficientSpaceError")), Localizer.i18n_str("InsufficientSpaceErrorExplanation"), Localizer.i18n_str("InsufficientSpaceWindowTitle"),
                                 JOptionPane.ERROR_MESSAGE);
                         inputFile = null;
                     } else {
                         // Give a warning if the file is rather large (100MB+)
                         if (inputFile.length() > LARGE_SIZE_FILE_LENGTH) {
-                            contactCountLabel.setText("Loading...");
+                            contactCountLabel.setText(Localizer.i18n_str("LoadingMessage"));
                             contactCountLabel.setVisible(true);
-                            System.out.println("Big file");
+                            System.out.println(Localizer.i18n_str("BigFileWarning"));
                         }
 
                         outputTask.setInputFile(inputFile);
@@ -103,23 +119,23 @@ public class ContactGUI {
                     outputDirectory = fc.getSelectedFile();
                     outputTask.setOutputDirectory(outputDirectory);
                 }
-            } else if ("run".equals(e.getActionCommand())) {
+            } else if (RUN_ACTION_COMMAND.equals(e.getActionCommand())) {
                 // Run Photo Output
                 progressBar.setValue(0);
-                contactCountLabel.setText("0 contact photos exported");
+                contactCountLabel.setText(Localizer.i18n_str("ZeroExportText"));
 
                 // allow the action to be stopable
-                runButton.setActionCommand("cancel");
-                runButton.setText("Cancel");
+                runButton.setActionCommand(CANCEL_ACTION_COMMAND);
+                runButton.setText(Localizer.i18n_str("CancelButtonText"));
 
                 // setup the threaded task
                 outputTask.addPropertyChangeListener(this);
                 if (outputTask.isRunnable()) outputTask.execute();
                 else {
                     //restore properties to non-running state and disable run button
-                    contactCountLabel.setText("Problem Occurred with Property Setting");
-                    runButton.setActionCommand("run");
-                    runButton.setText("Run");
+                    contactCountLabel.setText(Localizer.i18n_str("PropertySettingErrorMessage"));
+                    runButton.setActionCommand(RUN_ACTION_COMMAND);
+                    runButton.setText(Localizer.i18n_str(ContactPhotos.RUN_BUTTON_TEXT));
                     runButton.setEnabled(false);
                 }
 
@@ -131,7 +147,7 @@ public class ContactGUI {
                 // cancel button pressed
                 outputTask.cancel(true);
                 contactCountLabel.setVisible(true);
-                contactCountLabel.setText(String.format("%d contact photos exported before cancelling", outputTask.getContactsOutputSoFar()));
+                contactCountLabel.setText(String.format(Localizer.i18n_str("ExportCountBeforeCancel"), outputTask.getContactsOutputSoFar()));
                 frame.pack();
 
                 //reenable buttons
@@ -151,10 +167,10 @@ public class ContactGUI {
 
         @Override
         public void propertyChange(PropertyChangeEvent evt) {
-            if ("progress".equals(evt.getPropertyName())) {
+            if (PROGRESS_EVENT_MESSAGE.equals(evt.getPropertyName())) {
                 int progress = (Integer) evt.getNewValue();
                 progressBar.setValue(progress);
-                contactCountLabel.setText(String.format("%d contact photos exported", outputTask.getContactsOutputSoFar()));
+                contactCountLabel.setText(String.format(Localizer.i18n_str("ExportCount"), outputTask.getContactsOutputSoFar()));
             }
         }
     }

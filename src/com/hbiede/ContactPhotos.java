@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NonNls;
 import javax.swing.*;
 import java.io.*;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 public class ContactPhotos extends SwingWorker<Void, Void> {
@@ -23,6 +24,9 @@ public class ContactPhotos extends SwingWorker<Void, Void> {
     @NonNls
     private static final String IO_PROBLEM_RESOURCE_KEY = "IOProblem";
     private static final char SPACE_CHAR = ' ';
+    @NonNls
+    public static final String RUN_BUTTON_TEXT = "RunButtonText";
+    private static final char VCF_FIELD_DELIMITER = ':';
     private static ContactGUI gui = new ContactGUI();
     private File inputFile = null;
     private File outputDirectory = null;
@@ -49,9 +53,9 @@ public class ContactPhotos extends SwingWorker<Void, Void> {
         BufferedReader br;
         int contactsCount = 0;
         try {
-            br = new BufferedReader(new FileReader(contactsFile));
-        } catch (FileNotFoundException fnfe) {
-            fnfe.printStackTrace();
+            br = new BufferedReader(new FileReader(contactsFile, StandardCharsets.UTF_8));
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
             return 0;
         }
 
@@ -104,8 +108,8 @@ public class ContactPhotos extends SwingWorker<Void, Void> {
     protected Void doInBackground() {
         BufferedReader br;
         try {
-            br = new BufferedReader(new FileReader(inputFile));
-        } catch (FileNotFoundException e) {
+            br = new BufferedReader(new FileReader(inputFile, StandardCharsets.UTF_8));
+        } catch (IOException ioe) {
             System.out.println(Localizer.i18n_str("RequestValidVCF"));
             return null;
         }
@@ -137,7 +141,7 @@ public class ContactPhotos extends SwingWorker<Void, Void> {
                 } else if (newLine.contains(PHOTO)) {
                     // Start a new photo string
                     photoString.delete(0, photoString.length());
-                    photoString.append(newLine.substring(newLine.indexOf(':') + 1));
+                    photoString.append(newLine.substring(newLine.indexOf(VCF_FIELD_DELIMITER) + 1));
                     photoInProgress = true;
                 } else if (photoInProgress && newLine.charAt(0) == SPACE_CHAR) {
                     // Add to the existing photo string if the line starts with a space (an indent
@@ -167,7 +171,8 @@ public class ContactPhotos extends SwingWorker<Void, Void> {
                         os.close();
                         contactName = "";
                     } catch (Exception e) {
-                        System.out.printf(Localizer.i18n_str("BrokenPhoto") + "\n", contactName);
+                        System.out.printf(Localizer.i18n_str("BrokenPhoto"), contactName);
+                        System.out.println(); // new line character
                         System.err.println(e.getMessage());
                         continue;
                     }
@@ -185,8 +190,9 @@ public class ContactPhotos extends SwingWorker<Void, Void> {
 
     @Override
     protected void done() {
-        gui.runButton.setActionCommand("run");
-        gui.runButton.setText("Run");
+        @NonNls String terminatingActionCommand = "run";
+        gui.runButton.setActionCommand(terminatingActionCommand);
+        gui.runButton.setText(Localizer.i18n_str(RUN_BUTTON_TEXT));
         gui.fileButton.setEnabled(true);
         gui.directoryButton.setEnabled(true);
     }

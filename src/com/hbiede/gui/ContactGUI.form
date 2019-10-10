@@ -2,7 +2,7 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.hbiede.gui.ContactGUI">
   <grid id="27dc6" binding="mainPanel" layout-manager="GridBagLayout">
     <constraints>
-      <xy x="20" y="20" width="508" height="400"/>
+      <xy x="20" y="20" width="786" height="400"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -17,8 +17,8 @@
           <maximumSize width="120" height="30"/>
           <minimumSize width="120" height="30"/>
           <preferredSize width="120" height="30"/>
-          <text value="VCF File"/>
-          <toolTipText value="Choose a VCF File to process"/>
+          <text resource-bundle="locales/contactsOutput" key="FileButtonText"/>
+          <toolTipText resource-bundle="locales/contactsOutput" key="FileButtonTooltip"/>
         </properties>
       </component>
       <hspacer id="3f869">
@@ -40,8 +40,8 @@
         </constraints>
         <properties>
           <actionCommand value="dir"/>
-          <text value="Output Folder"/>
-          <toolTipText value="Choose a folder to which to output the photos"/>
+          <text resource-bundle="locales/contactsOutput" key="DirectoryButtonText"/>
+          <toolTipText resource-bundle="locales/contactsOutput" key="DirectoryButtonTooltip"/>
         </properties>
       </component>
       <hspacer id="4e737">
@@ -65,8 +65,8 @@
             </constraints>
             <properties>
               <actionCommand value="FirstLast"/>
-              <text value="First Last"/>
-              <toolTipText value="ie John Smith"/>
+              <text resource-bundle="locales/contactsOutput" key="FirstLastOptionText"/>
+              <toolTipText resource-bundle="locales/contactsOutput" key="FirstLastOptionTooltip"/>
             </properties>
           </component>
           <component id="d4199" class="javax.swing.JRadioButton" binding="lastFirstRadioButton" default-binding="true">
@@ -77,8 +77,8 @@
             <properties>
               <actionCommand value="LastFirst"/>
               <selected value="true"/>
-              <text value="Last, First"/>
-              <toolTipText value="ie Smith, John"/>
+              <text resource-bundle="locales/contactsOutput" key="LastFirstOptionText"/>
+              <toolTipText resource-bundle="locales/contactsOutput" key="LastFirstOption"/>
             </properties>
           </component>
           <component id="a5da" class="javax.swing.JLabel" binding="radioTitleLabel">
@@ -87,7 +87,7 @@
               <gridbag weightx="0.0" weighty="0.0"/>
             </constraints>
             <properties>
-              <text value="Output Name:"/>
+              <text resource-bundle="locales/contactsOutput" key="RadioOptionText"/>
             </properties>
           </component>
         </children>
@@ -103,7 +103,7 @@
           <maximumSize width="90" height="30"/>
           <minimumSize width="90" height="30"/>
           <preferredSize width="83" height="30"/>
-          <text value="Run"/>
+          <text resource-bundle="locales/contactsOutput" key="RunButtonText"/>
         </properties>
       </component>
       <component id="8c9cc" class="javax.swing.JProgressBar" binding="progressBar">
@@ -126,7 +126,7 @@
           <enabled value="true"/>
           <horizontalAlignment value="0"/>
           <horizontalTextPosition value="0"/>
-          <text value="000 contact photos exported before cancelling"/>
+          <text resource-bundle="locales/contactsOutput" key="DefaultLabelText"/>
           <visible value="true"/>
         </properties>
       </component>
